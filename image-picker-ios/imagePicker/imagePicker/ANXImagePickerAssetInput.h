@@ -8,6 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
+#import <AssetsLibrary/AssetsLibrary.h>
+
+#import "FlashRuntimeExtensions.h"
+
 @interface ANXImagePickerAssetInput : NSObject
+
+#pragma mark Constructor
+
+-(id) initWithAsset:(ALAsset *)asset;
+
+#pragma mark properties
+
+@property(readonly) ALAsset *asset;
+
+#pragma mark methods
+
+-(long long) getSize;
+
+-(void) readBytes: (FREObject) bytes fromOffset: (long long) offset desiredLength: (NSUInteger) length;
 
 @end

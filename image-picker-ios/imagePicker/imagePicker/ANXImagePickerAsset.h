@@ -8,6 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+#import <AssetsLibrary/AssetsLibrary.h>
+
+#import "FlashRuntimeExtensions.h"
+
 @interface ANXImagePickerAsset : NSObject
+
+#pragma mark Constructor
+
+-(id) initWithAsset:(ALAsset *)asset andURL: (NSURL*) url;
+
+#pragma mark methods
+
+-(FREObject) toFREObject;
 
 @end
