@@ -8,6 +8,8 @@ import com.github.airext.data.Asset;
 import com.github.airext.data.ImagePickerBrowseOptions;
 import com.github.airext.events.ImagePickerEvent;
 
+import flash.events.ErrorEvent;
+
 import flash.events.EventDispatcher;
 import flash.events.StatusEvent;
 import flash.external.ExtensionContext;
@@ -121,6 +123,10 @@ public class ImagePicker extends EventDispatcher
     //
     //--------------------------------------------------------------------------
 
+    //--------------------------------------
+    //  Methods: Public API
+    //--------------------------------------
+
     public function browse(options:ImagePickerBrowseOptions=null):void
     {
         context.addEventListener(StatusEvent.STATUS, statusHandler);
@@ -130,9 +136,33 @@ public class ImagePicker extends EventDispatcher
         context.call("browse", options);
     }
 
+    //--------------------------------------
+    //  Methods: Internal API
+    //--------------------------------------
+
     image_picker function getAsset(url:String):Asset
     {
         return context.call("getAsset", url) as Asset;
+    }
+
+    //--------------------------------------
+    //  Methods: Helpers
+    //--------------------------------------
+
+    private function dispatchErrorEvent(message:String):void
+    {
+        if (this.hasEventListener(ErrorEvent.ERROR))
+        {
+            dispatchEvent(new ErrorEvent(ErrorEvent.ERROR, false, false, message));
+        }
+    }
+
+    private function forwardStatusEvent(event:StatusEvent):void
+    {
+        if (this.hasEventListener(StatusEvent.STATUS))
+        {
+            dispatchEvent(event.clone());
+        }
     }
 
     //--------------------------------------------------------------------------
@@ -145,7 +175,7 @@ public class ImagePicker extends EventDispatcher
     {
         switch (event.code)
         {
-            case "ImagePicker.Select" :
+            case "ImagePicker.Browse.Select" :
 
                 context.removeEventListener(StatusEvent.STATUS, statusHandler);
 
@@ -153,7 +183,7 @@ public class ImagePicker extends EventDispatcher
 
                 break;
 
-            case "ImagePicker.Cancel" :
+            case "ImagePicker.Browse.Cancel" :
 
                 context.removeEventListener(StatusEvent.STATUS, statusHandler);
 
@@ -161,9 +191,17 @@ public class ImagePicker extends EventDispatcher
 
                 break;
 
+            case "ImagePicker.Browse.Failed" :
+
+                context.removeEventListener(StatusEvent.STATUS, statusHandler);
+
+                dispatchErrorEvent(event.level);
+
+                break;
+
             default :
 
-                dispatchEvent(event.clone());
+                forwardStatusEvent(event);
 
                 break;
         }

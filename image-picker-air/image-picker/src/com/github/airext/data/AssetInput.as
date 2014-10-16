@@ -8,6 +8,7 @@ import com.github.airext.core.image_picker;
 
 import flash.events.Event;
 import flash.events.EventDispatcher;
+import flash.events.IOErrorEvent;
 import flash.events.StatusEvent;
 import flash.utils.ByteArray;
 
@@ -16,6 +17,8 @@ use namespace image_picker;
 [Event(name="open", type="flash.events.Event")]
 
 [Event(name="status", type="flash.events.StatusEvent")]
+
+[Event(name="ioError", type="flash.events.IOErrorEvent")]
 
 public class AssetInput extends EventDispatcher
 {
@@ -70,10 +73,18 @@ public class AssetInput extends EventDispatcher
     //
     //--------------------------------------------------------------------------
 
+    //-------------------------------------
+    //  Methods: Public API
+    //-------------------------------------
+
     public function readBytes(bytes:ByteArray, offset:uint = 0, length:uint = 0):void
     {
         ImagePicker.context.call("assetInputReadBytes", this.url, bytes, offset, length);
     }
+
+    //-------------------------------------
+    //  Methods: Internal API
+    //-------------------------------------
 
     image_picker function open(url:String):void
     {
@@ -89,6 +100,18 @@ public class AssetInput extends EventDispatcher
         ImagePicker.context.removeEventListener(StatusEvent.STATUS, statusHandler);
 
         ImagePicker.context.call("assetInputClose", this.url);
+    }
+
+    //-------------------------------------
+    //  Methods: Helpers
+    //-------------------------------------
+
+    private function forwardStatusEvent(event:StatusEvent):void
+    {
+        if (this.hasEventListener(StatusEvent.STATUS))
+        {
+            dispatchEvent(event.clone());
+        }
     }
 
     //--------------------------------------------------------------------------
@@ -111,13 +134,25 @@ public class AssetInput extends EventDispatcher
 
                 case "ImagePicker.AssetInput.Open.Failed" :
 
-                    dispatchEvent(new StatusEvent(StatusEvent.STATUS, false, false, "ImagePicker.AssetInput.Open.Failed", "error"));
+                    dispatchEvent(new IOErrorEvent(IOErrorEvent.IO_ERROR, false, false, "The AssetInput can not be opened."));
 
                     break;
 
                 case "ImagePicker.AssetInput.NotAvailable" :
 
-                    dispatchEvent(new StatusEvent(StatusEvent.STATUS, false, false, "ImagePicker.AssetInput.NotAvailable", "error"));
+                    dispatchEvent(new IOErrorEvent(IOErrorEvent.IO_ERROR, false, false, "The AssetInput is not found."));
+
+                    break;
+
+                case "ImagePicker.AssetInput.ReadBytes.Failed" :
+
+                    dispatchEvent(new IOErrorEvent(IOErrorEvent.IO_ERROR, false, false, "The AssetInput can not be read."));
+
+                    break;
+
+                default :
+
+                        forwardStatusEvent(event);
 
                     break;
             }
