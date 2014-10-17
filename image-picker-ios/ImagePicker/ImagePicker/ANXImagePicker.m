@@ -2,7 +2,7 @@
 //  ImagePicker.m
 //  ImagePicker
 //
-//  Created by Maxim on 10/16/14.
+//  Created by Max Rozdobudko on 10/16/14.
 //  Copyright (c) 2014 Max Rozdobudko. All rights reserved.
 //
 
@@ -53,6 +53,8 @@ NSMutableDictionary *assets;
 
 NSMutableDictionary *inputs;
 
+UIPopoverController *currentPopoverController;
+
 #pragma mark Methods: Library
 
 -(ALAssetsLibrary*) acquireLibrary
@@ -89,7 +91,7 @@ NSMutableDictionary *inputs;
     
     NSArray *availableTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     
-    if ([[options valueForKey:@"image"] boolValue] == YES)
+    if ([[options objectForKey:@"image"] boolValue] == YES)
     {
         if ([availableTypes containsObject:(NSString *)kUTTypeImage])
         {
@@ -97,7 +99,7 @@ NSMutableDictionary *inputs;
         }
     }
     
-    if ([[options valueForKey:@"video"] boolValue] == YES)
+    if ([[options objectForKey:@"video"] boolValue] == YES)
     {
         if ([availableTypes containsObject:(NSString *)kUTTypeMovie])
         {
@@ -123,9 +125,40 @@ NSMutableDictionary *inputs;
     currentImagePickerController.mediaTypes = mediaTypes;
     currentImagePickerController.allowsEditing = NO;
     
-    [currentRootViewController presentViewController: currentImagePickerController animated:YES completion:^{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        [currentRootViewController presentViewController: currentImagePickerController animated:YES completion:^{
+            [self dispatchStatus:@"ImagePicker.Open"];
+        }];
+    }
+    else
+    {
+        currentPopoverController = [[UIPopoverController alloc] initWithContentViewController:currentImagePickerController];
+        currentPopoverController.delegate = self;
+        
+        CGRect anchor = [(NSValue*)[options objectForKey:@"origin"] CGRectValue];
+        
+        CGFloat scale = [[UIScreen mainScreen] scale];
+        
+        CGRect scaledAnchor = CGRectMake(anchor.origin.x / scale, anchor.origin.y / scale, anchor.size.width / scale, anchor.size.height / scale);
+        
+        [currentPopoverController presentPopoverFromRect:scaledAnchor inView:currentRootViewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        
+        NSNumber *width = [options objectForKey:@"width"];
+        NSNumber *height = [options objectForKey:@"height"];
+        
+        if (width && height && [width floatValue] > 0 && [height floatValue] > 0)
+        {
+            CGSize size = CGSizeMake([width floatValue], [height floatValue]);
+            
+            currentPopoverController.popoverContentSize = size;
+            
+            [currentPopoverController setPopoverContentSize:size animated:YES];
+        }
+        
         [self dispatchStatus:@"ImagePicker.Open"];
-    }];
+    }
+    
     
     return false;
 }
@@ -156,7 +189,7 @@ NSMutableDictionary *inputs;
             {
                 ANXImagePickerAssetInput *input =  [[ANXImagePickerAssetInput alloc] initWithAsset: asset];
              
-                [inputs setValue:input forKey:url];
+                [inputs setObject:input forKey:url];
             }
          
             [self dispatch:@"ImagePicker.AssetInput.Open.Success" withLevel: url];
@@ -188,7 +221,23 @@ NSMutableDictionary *inputs;
     [self releaseLibrary];
 }
 
-#pragma mark Callbacks
+#pragma mark Helper methods
+
+-(void) dismissCurrentPopover: (UIPopoverController *) popoverController
+{
+    if (currentPopoverController)
+    {
+        [currentPopoverController dismissPopoverAnimated:YES];
+        
+        currentPopoverController = nil;
+    }
+    else if (popoverController)
+    {
+        [popoverController dismissPopoverAnimated:YES];
+    }
+}
+
+#pragma mark UIImagePickerController Callbacks
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
 {
@@ -203,7 +252,7 @@ NSMutableDictionary *inputs;
             {
                 ANXImagePickerAsset *promise = [[ANXImagePickerAsset alloc] initWithAsset: asset andURL: assetURL];
              
-                [assets setValue:promise forKey:assetURL.absoluteString];
+                [assets setObject:promise forKey:assetURL.absoluteString];
             }
          
             [self dispatch:@"ImagePicker.Browse.Select" withLevel:assetURL.absoluteString];
@@ -213,14 +262,25 @@ NSMutableDictionary *inputs;
             [self dispatch:@"ImagePicker.Browse.Failed" withLevel:error.localizedDescription];
         }];
     
+    [self dismissCurrentPopover: nil];
+    
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dispatchStatus:@"ImagePicker.Browse.Cancel"];
+    
+    [self dismissCurrentPopover: nil];
 
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark UIPopoverController Callbacks
+
+- (void) popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    [self dismissCurrentPopover: popoverController];
 }
 
 #pragma mark Dispatch events

@@ -27,9 +27,16 @@
 
         private function show_clickHandler(event:MouseEvent):void
         {
+            var position:Point = new Point(showButton.x, showButton.y);
+            position = this.localToGlobal(position);
+
             var options:ImagePickerBrowseOptions = new ImagePickerBrowseOptions();
             options.video = true;
             options.image = true;
+
+            options.origin = new Rectangle(position.x, position.y, showButton.width, showButton.height);
+            options.width = widthNumericStepper.value;
+            options.height = heightNumericStepper.value;
 
             ImagePicker.sharedInstance().addEventListener(ImagePickerEvent.SELECT, selectHandler);
             ImagePicker.sharedInstance().addEventListener(ImagePickerEvent.CANCEL, cancelHandler);
@@ -107,11 +114,16 @@
         <s:VerticalLayout horizontalAlign="center" />
     </s:layout>
 
-    <s:Button label="Show" click="show_clickHandler(event)" />
+    <s:Button id="showButton" label="Show" click="show_clickHandler(event)" />
 
     <s:Button label="Open" enabled="{asset}" click="open_clickHandler(event)" />
 
     <s:Button label="Read" enabled="{input}" click="read_clickHandler(event)" />
+
+    <s:HGroup>
+        <s:NumericStepper id="widthNumericStepper" minimum="0" stepSize="50" maximum="1000" width="200" height="100" />
+        <s:NumericStepper id="heightNumericStepper" minimum="0" stepSize="50" maximum="1000" width="200" height="100" />
+    </s:HGroup>
 
     <s:Image source="{bytes}" />
 

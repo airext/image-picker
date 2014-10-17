@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import <CoreGraphics/CoreGraphics.h>
+
 #import "FlashRuntimeExtensions.h"
 
 @interface ANXImagePickerConversionRoutines : NSObject
+
++(BOOL) isNull: (FREObject) object;
 
 +(NSNumber*) getBoolFrom: (FREObject) object forProperty: (NSString*) property;
 
@@ -20,7 +24,9 @@
 
 +(NSDate*) getDateFrom: (FREObject) object forProperty: (NSString*) property;
 
-+(CGRect) getRectangleFrom: (FREObject) object forProperty: (NSString*) property;
++(double) getDoubleFrom: (FREObject) object forProperty: (NSString*) property;
+
++(CGRect) getRectFrom: (FREObject) object forProperty: (NSString*) property withDefault: (CGRect) defaultValue;
 
 +(FREObject) convertNSStringToFREObject:(NSString*) string;
 +(NSString*) convertFREObjectToNSString: (FREObject) string;
@@ -28,7 +34,10 @@
 +(NSDate*) convertFREObjectToNSDate: (FREObject) date;
 
 +(NSUInteger) convertFREObjectToNSUInteger: (FREObject) integer withDefault: (NSUInteger) defaultValue;
+
 +(FREObject) convertLongLongToFREObject: (long long) number;
+
++(double) convertFREObjectToDouble: (FREObject) number;
 
 +(CGRect) convertFREObjectToCGRect: (FREObject) rectangle;
 

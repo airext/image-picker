@@ -20,6 +20,7 @@
 		0EF74EE219F02AB1006865E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EF74EE019F02AB1006865E9 /* Main.storyboard */; };
 		0EF74EE419F02AB1006865E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EF74EE319F02AB1006865E9 /* Images.xcassets */; };
 		0EF74EE719F02AB1006865E9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF74EE519F02AB1006865E9 /* LaunchScreen.xib */; };
+		0EF74EFE19F1042D006865E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EF74EFD19F1042D006865E9 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		0EF74EE619F02AB1006865E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0EF74EF119F02AB1006865E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0EF74EF219F02AB1006865E9 /* ImagePickerDebugTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagePickerDebugTests.m; sourceTree = "<group>"; };
+		0EF74EFD19F1042D006865E9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EF74EFE19F1042D006865E9 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +107,7 @@
 		0E46783E19EFF3800074260F = {
 			isa = PBXGroup;
 			children = (
+				0EF74EFD19F1042D006865E9 /* CoreGraphics.framework */,
 				0E46784919EFF3800074260F /* ImagePicker */,
 				0E46785319EFF3800074260F /* ImagePickerTests */,
 				0EF74ED519F02AB0006865E9 /* ImagePickerDebug */,

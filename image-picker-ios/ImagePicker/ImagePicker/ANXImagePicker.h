@@ -16,7 +16,7 @@
 
 #import "ANXImagePickerAssetInput.h"
 
-@interface ANXImagePicker : NSObject<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface ANXImagePicker : NSObject<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIPopoverControllerDelegate>
 
 #pragma mark Shared Instance
 

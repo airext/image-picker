@@ -31,9 +31,25 @@ FREObject ANXImagePickerBrowse(FREContext context, void* functionData, uint32_t 
 {
     NSMutableDictionary *options = [NSMutableDictionary dictionary];
     
-    [options setValue:[ANXImagePickerConversionRoutines getBoolFrom:argv[0] forProperty:@"video"] forKey:@"video"];
+    [options setObject:[ANXImagePickerConversionRoutines getBoolFrom:argv[0] forProperty:@"video"] forKey:@"video"];
     
-    [options setValue:[ANXImagePickerConversionRoutines getBoolFrom:argv[0] forProperty:@"image"] forKey:@"image"];
+    [options setObject:[ANXImagePickerConversionRoutines getBoolFrom:argv[0] forProperty:@"image"] forKey:@"image"];
+    
+    NSNumber *width = [ANXImagePickerConversionRoutines getNumberFrom:argv[0] forProperty:@"width"];
+    
+    if (width)
+    {
+        [options setObject:width forKey:@"width"];
+    }
+   
+    NSNumber *height = [ANXImagePickerConversionRoutines getNumberFrom:argv[0] forProperty:@"height"];
+    
+    if (height)
+    {
+        [options setObject:height forKey:@"height"];
+    }
+    
+    [options setObject:[NSValue valueWithCGRect:[ANXImagePickerConversionRoutines getRectFrom:argv[0] forProperty:@"origin" withDefault:CGRectMake(0, 0, 100, 45)]] forKey:@"origin"];
     
     [[ANXImagePicker sharedInstance] browse:options];
     

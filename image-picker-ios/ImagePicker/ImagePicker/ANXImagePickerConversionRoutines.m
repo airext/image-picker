@@ -10,6 +10,21 @@
 
 @implementation ANXImagePickerConversionRoutines
 
++(BOOL) isNull: (FREObject) object
+{
+    if (object == NULL)
+        return YES;
+    
+    FREObjectType type = FRE_TYPE_NULL;
+    
+    FREResult result = FREGetObjectType(object, &type);
+    
+    if (result != FRE_OK)
+        return YES;
+    
+    return type == FRE_TYPE_NULL;
+}
+
 +(NSNumber*) getBoolFrom: (FREObject) object forProperty: (NSString*) property
 {
     FREResult result;
@@ -36,7 +51,7 @@
     FREResult result;
     
     FREObject propertyValue;
-    
+
     result = FREGetObjectProperty(object, (const uint8_t*) [property UTF8String], &propertyValue, NULL);
     
     if (result != FRE_OK)
@@ -44,8 +59,8 @@
     
     double tempValue;
     
-    result = FREGetObjectAsDouble(object, &tempValue);
-    
+    result = FREGetObjectAsDouble(propertyValue, &tempValue);
+
     if (result != FRE_OK)
         return nil;
     
@@ -78,6 +93,37 @@
         return nil;
     
     return [self convertFREObjectToNSDate:propertyValue];
+}
+
++(double) getDoubleFrom: (FREObject) object forProperty: (NSString*) property
+{
+    FREResult result;
+    
+    FREObject propertyValue;
+    
+    result = FREGetObjectProperty(object, (const uint8_t*) [property UTF8String], &propertyValue, NULL);
+    
+    if (result != FRE_OK)
+        return 0.0;
+    
+    return [self convertFREObjectToDouble:propertyValue];
+}
+
++(CGRect) getRectFrom: (FREObject) object forProperty: (NSString*) property withDefault: (CGRect)defaultValue
+{
+    FREResult result;
+    
+    FREObject propertyValue;
+    
+    result = FREGetObjectProperty(object, (const uint8_t*) [property UTF8String], &propertyValue, NULL);
+    
+    if (result != FRE_OK)
+        return defaultValue;
+    
+    if ([self isNull:propertyValue])
+        return defaultValue;
+        
+    return [self convertFREObjectToCGRect:propertyValue];
 }
 
 +(FREObject) convertNSStringToFREObject:(NSString*) string
@@ -152,6 +198,32 @@
     FRENewObjectFromUint32((uint32_t) number, &result);
     
     return result;
+}
+
++(double) convertFREObjectToDouble: (FREObject) number
+{
+    FREResult result;
+    
+    double value;
+    
+    result = FREGetObjectAsDouble(number, &value);
+    
+    if (result != FRE_OK)
+        return 0.0;
+    
+    return value;
+}
+
++(CGRect) convertFREObjectToCGRect: (FREObject) rect
+{
+    double x, y, width, height;
+    
+    x = [self getDoubleFrom:rect forProperty:@"x"];
+    y = [self getDoubleFrom:rect forProperty:@"y"];
+    width = [self getDoubleFrom:rect forProperty:@"width"];
+    height = [self getDoubleFrom:rect forProperty:@"height"];
+    
+    return CGRectMake(x, y, width, height);
 }
 
 @end
