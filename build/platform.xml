@@ -2,8 +2,7 @@
     <description></description> 
     <sdkVersion>6.0</sdkVersion> 
     <linkerOptions>
-        <!-- <option>-framework AddressBook</option>
-        <option>-framework AddressBookUI</option> -->
+        <option>-framework AssetsLibrary</option>
     </linkerOptions> 
     <!-- <packagedDependencies> 
         <packagedDependency></packagedDependency> 
