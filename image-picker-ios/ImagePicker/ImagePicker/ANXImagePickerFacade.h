@@ -2,7 +2,7 @@
 //  ANXImagePickerFacade.h
 //  ImagePicker
 //
-//  Created by Maxim on 10/16/14.
+//  Created by Max Rozdobudko on 10/16/14.
 //  Copyright (c) 2014 Max Rozdobudko. All rights reserved.
 //
 

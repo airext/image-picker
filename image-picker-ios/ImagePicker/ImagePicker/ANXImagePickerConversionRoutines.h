@@ -2,7 +2,7 @@
 //  ANXImagePickerRoutines.h
 //  ImagePicker
 //
-//  Created by Maxim on 10/16/14.
+//  Created by Max Rozdobudko on 10/16/14.
 //  Copyright (c) 2014 Max Rozdobudko. All rights reserved.
 //
 
@@ -20,6 +20,8 @@
 
 +(NSDate*) getDateFrom: (FREObject) object forProperty: (NSString*) property;
 
++(CGRect) getRectangleFrom: (FREObject) object forProperty: (NSString*) property;
+
 +(FREObject) convertNSStringToFREObject:(NSString*) string;
 +(NSString*) convertFREObjectToNSString: (FREObject) string;
 
@@ -27,5 +29,7 @@
 
 +(NSUInteger) convertFREObjectToNSUInteger: (FREObject) integer withDefault: (NSUInteger) defaultValue;
 +(FREObject) convertLongLongToFREObject: (long long) number;
+
++(CGRect) convertFREObjectToCGRect: (FREObject) rectangle;
 
 @end
