@@ -79,6 +79,8 @@ public class AssetInput extends EventDispatcher
 
     public function readBytes(bytes:ByteArray, offset:uint = 0, length:uint = 0):void
     {
+        length = length == 0 ? bytesAvailable : length;
+
         ImagePicker.context.call("assetInputReadBytes", this.url, bytes, offset, length);
     }
 
