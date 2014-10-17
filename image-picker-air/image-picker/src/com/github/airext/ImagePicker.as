@@ -13,6 +13,7 @@ import flash.events.ErrorEvent;
 import flash.events.EventDispatcher;
 import flash.events.StatusEvent;
 import flash.external.ExtensionContext;
+import flash.geom.Rectangle;
 import flash.net.registerClassAlias;
 
 use namespace image_picker;
@@ -132,6 +133,7 @@ public class ImagePicker extends EventDispatcher
         context.addEventListener(StatusEvent.STATUS, statusHandler);
 
         options = options || new ImagePickerBrowseOptions();
+        options.origin = options.origin || new Rectangle(0, 0, 0, 0);
 
         context.call("browse", options);
     }

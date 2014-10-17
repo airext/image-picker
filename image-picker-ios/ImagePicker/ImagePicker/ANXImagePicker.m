@@ -138,11 +138,7 @@ UIPopoverController *currentPopoverController;
         
         CGRect anchor = [(NSValue*)[options objectForKey:@"origin"] CGRectValue];
         
-        CGFloat scale = [[UIScreen mainScreen] scale];
-        
-        CGRect scaledAnchor = CGRectMake(anchor.origin.x / scale, anchor.origin.y / scale, anchor.size.width / scale, anchor.size.height / scale);
-        
-        [currentPopoverController presentPopoverFromRect:scaledAnchor inView:currentRootViewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [currentPopoverController presentPopoverFromRect:anchor inView:currentRootViewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         
         NSNumber *width = [options objectForKey:@"width"];
         NSNumber *height = [options objectForKey:@"height"];
@@ -280,6 +276,8 @@ UIPopoverController *currentPopoverController;
 
 - (void) popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
+    [self dispatchStatus:@"ImagePicker.Browse.Cancel"];
+    
     [self dismissCurrentPopover: popoverController];
 }
 

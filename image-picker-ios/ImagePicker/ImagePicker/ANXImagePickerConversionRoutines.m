@@ -12,7 +12,7 @@
 
 +(BOOL) isNull: (FREObject) object
 {
-    if (object == NULL)
+   if (object == NULL)
         return YES;
     
     FREObjectType type = FRE_TYPE_NULL;
@@ -109,7 +109,7 @@
     return [self convertFREObjectToDouble:propertyValue];
 }
 
-+(CGRect) getRectFrom: (FREObject) object forProperty: (NSString*) property withDefault: (CGRect)defaultValue
++(CGRect) getRectFrom: (FREObject) object forProperty: (NSString*) property
 {
     FREResult result;
     
@@ -118,10 +118,10 @@
     result = FREGetObjectProperty(object, (const uint8_t*) [property UTF8String], &propertyValue, NULL);
     
     if (result != FRE_OK)
-        return defaultValue;
+        return CGRectZero;
     
     if ([self isNull:propertyValue])
-        return defaultValue;
+        return CGRectZero;
         
     return [self convertFREObjectToCGRect:propertyValue];
 }

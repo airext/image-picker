@@ -26,7 +26,7 @@
 
 +(double) getDoubleFrom: (FREObject) object forProperty: (NSString*) property;
 
-+(CGRect) getRectFrom: (FREObject) object forProperty: (NSString*) property withDefault: (CGRect) defaultValue;
++(CGRect) getRectFrom: (FREObject) object forProperty: (NSString*) property;
 
 +(FREObject) convertNSStringToFREObject:(NSString*) string;
 +(NSString*) convertFREObjectToNSString: (FREObject) string;

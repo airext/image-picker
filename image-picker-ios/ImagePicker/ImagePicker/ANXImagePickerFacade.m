@@ -49,7 +49,7 @@ FREObject ANXImagePickerBrowse(FREContext context, void* functionData, uint32_t 
         [options setObject:height forKey:@"height"];
     }
     
-    [options setObject:[NSValue valueWithCGRect:[ANXImagePickerConversionRoutines getRectFrom:argv[0] forProperty:@"origin" withDefault:CGRectMake(0, 0, 100, 45)]] forKey:@"origin"];
+    [options setObject:[NSValue valueWithCGRect:[ANXImagePickerConversionRoutines getRectFrom:argv[0] forProperty:@"origin"]] forKey:@"origin"];
     
     [[ANXImagePicker sharedInstance] browse:options];
     

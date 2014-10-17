@@ -34,7 +34,9 @@
             options.video = true;
             options.image = true;
 
-            options.origin = new Rectangle(position.x, position.y, showButton.width, showButton.height);
+            var scale:Number = runtimeDPI >= 320 ? 2 : 1;
+
+            options.origin = new Rectangle(position.x/scale, position.y/scale, showButton.width/scale, showButton.height/scale);
             options.width = widthNumericStepper.value;
             options.height = heightNumericStepper.value;
 
