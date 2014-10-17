@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" enterFrame="enterFrameHandler(event)">
+
+    <fx:Script>
+        <![CDATA[
+        import com.github.airext.ImagePicker;
+        import com.github.airext.data.Asset;
+        import com.github.airext.data.AssetInput;
+        import com.github.airext.data.ImagePickerBrowseOptions;
+        import com.github.airext.events.ImagePickerEvent;
+
+        import flash.filesystem.FileStream;
+
+        import mx.events.ModuleEvent;
+
+        [Bindable]
+        private var asset:Asset;
+
+        [Bindable]
+        private var input:AssetInput;
+
+        [Bindable]
+        private var inputOpened:Boolean;
+
+        [Bindable]
+        private var bytes:ByteArray;
+
+        private function show_clickHandler(event:MouseEvent):void
+        {
+            var options:ImagePickerBrowseOptions = new ImagePickerBrowseOptions();
+            options.video = true;
+            options.image = true;
+
+            ImagePicker.sharedInstance().addEventListener(ImagePickerEvent.SELECT, selectHandler);
+            ImagePicker.sharedInstance().addEventListener(ImagePickerEvent.CANCEL, cancelHandler);
+
+            ImagePicker.sharedInstance().browse(options);
+        }
+
+        private function selectHandler(event:ImagePickerEvent):void
+        {
+            trace(event.asset);
+            trace(event.asset.name);
+            trace(event.asset.type);
+            trace(event.asset.url);
+
+            this.asset = event.asset as Asset;
+        }
+
+        private function cancelHandler(event:ImagePickerEvent):void
+        {
+            trace("cancel");
+        }
+
+        private function enterFrameHandler(event:Event):void
+        {
+//            trace(System.privateMemory);
+        }
+
+        private function read_clickHandler(event:MouseEvent):void
+        {
+            trace("Bytes Available: ", input.bytesAvailable);
+
+            var bytes:ByteArray = new ByteArray();
+
+            input.readBytes(bytes);
+
+            trace("Bytes read: ", bytes.length);
+
+            this.bytes = bytes;
+        }
+
+        private function open_clickHandler(event:MouseEvent):void
+        {
+            if (input != null)
+            {
+                input.removeEventListener(StatusEvent.STATUS, input_statusHandler);
+            }
+
+            inputOpened = false;
+
+            asset.close();
+
+            input = asset.open();
+
+            var openHandler:Function = function (event:Event):void
+            {
+                input.removeEventListener(Event.OPEN, openHandler);
+
+                input.addEventListener(StatusEvent.STATUS, input_statusHandler);
+
+                inputOpened = true;
+            }
+
+            input.addEventListener(Event.OPEN, openHandler);
+        }
+
+        private function input_statusHandler(event:StatusEvent):void
+        {
+            trace("StatusEvent.code:", event.code);
+        }
+
+        ]]>
+    </fx:Script>
+
+    <s:layout>
+        <s:VerticalLayout horizontalAlign="center" />
+    </s:layout>
+
+    <s:Button label="Show" click="show_clickHandler(event)" />
+
+    <s:Button label="Open" enabled="{asset}" click="open_clickHandler(event)" />
+
+    <s:Button label="Read" enabled="{input}" click="read_clickHandler(event)" />
+
+    <s:Image source="{bytes}" />
+
+</s:Application>

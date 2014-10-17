@@ -13,7 +13,24 @@
 		0E46786519EFF5960074260F /* ANXImagePickerAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E46786419EFF5960074260F /* ANXImagePickerAsset.m */; };
 		0E46786819EFF5C10074260F /* ANXImagePickerAssetInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E46786719EFF5C10074260F /* ANXImagePickerAssetInput.m */; };
 		0E46786B19EFF6C10074260F /* ANXImagePickerConversionRoutines.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E46786A19EFF6C10074260F /* ANXImagePickerConversionRoutines.m */; };
+		0EF74ECF19F02A85006865E9 /* libImagePicker.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0E46784719EFF3800074260F /* libImagePicker.a */; };
+		0EF74ED919F02AB0006865E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF74ED819F02AB0006865E9 /* main.m */; };
+		0EF74EDC19F02AB0006865E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF74EDB19F02AB0006865E9 /* AppDelegate.m */; };
+		0EF74EDF19F02AB0006865E9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF74EDE19F02AB0006865E9 /* ViewController.m */; };
+		0EF74EE219F02AB1006865E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EF74EE019F02AB1006865E9 /* Main.storyboard */; };
+		0EF74EE419F02AB1006865E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EF74EE319F02AB1006865E9 /* Images.xcassets */; };
+		0EF74EE719F02AB1006865E9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF74EE519F02AB1006865E9 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0EF74EFB19F02B2C006865E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E46783F19EFF3800074260F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E46784619EFF3800074260F;
+			remoteInfo = ImagePicker;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		0E46784519EFF3800074260F /* CopyFiles */ = {
@@ -26,13 +43,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0EF74ECE19F02A7B006865E9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "${PROJECT_DIR}/../../build";
+			dstSubfolderSpec = 0;
+			files = (
+				0EF74ECF19F02A85006865E9 /* libImagePicker.a in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0E46784719EFF3800074260F /* libImagePicker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libImagePicker.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E46784A19EFF3800074260F /* ANXImagePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ANXImagePicker.h; sourceTree = "<group>"; };
 		0E46784C19EFF3800074260F /* ANXImagePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ANXImagePicker.m; sourceTree = "<group>"; };
-		0E46785219EFF3800074260F /* ImagePickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImagePickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E46785519EFF3800074260F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E46785E19EFF3B00074260F /* ANXImagePickerFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANXImagePickerFacade.h; sourceTree = "<group>"; };
 		0E46785F19EFF3B00074260F /* ANXImagePickerFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANXImagePickerFacade.m; sourceTree = "<group>"; };
@@ -43,6 +69,18 @@
 		0E46786719EFF5C10074260F /* ANXImagePickerAssetInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANXImagePickerAssetInput.m; sourceTree = "<group>"; };
 		0E46786919EFF6C10074260F /* ANXImagePickerConversionRoutines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANXImagePickerConversionRoutines.h; sourceTree = "<group>"; };
 		0E46786A19EFF6C10074260F /* ANXImagePickerConversionRoutines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANXImagePickerConversionRoutines.m; sourceTree = "<group>"; };
+		0EF74ED419F02AB0006865E9 /* ImagePickerDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagePickerDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EF74ED719F02AB0006865E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0EF74ED819F02AB0006865E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0EF74EDA19F02AB0006865E9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0EF74EDB19F02AB0006865E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0EF74EDD19F02AB0006865E9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		0EF74EDE19F02AB0006865E9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0EF74EE119F02AB1006865E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0EF74EE319F02AB1006865E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0EF74EE619F02AB1006865E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		0EF74EF119F02AB1006865E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0EF74EF219F02AB1006865E9 /* ImagePickerDebugTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagePickerDebugTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +91,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0E46784F19EFF3800074260F /* Frameworks */ = {
+		0EF74ED119F02AB0006865E9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -68,6 +106,8 @@
 			children = (
 				0E46784919EFF3800074260F /* ImagePicker */,
 				0E46785319EFF3800074260F /* ImagePickerTests */,
+				0EF74ED519F02AB0006865E9 /* ImagePickerDebug */,
+				0EF74EEF19F02AB1006865E9 /* ImagePickerDebugTests */,
 				0E46784819EFF3800074260F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -76,7 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				0E46784719EFF3800074260F /* libImagePicker.a */,
-				0E46785219EFF3800074260F /* ImagePickerTests.xctest */,
+				0EF74ED419F02AB0006865E9 /* ImagePickerDebug.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,6 +163,47 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0EF74ED519F02AB0006865E9 /* ImagePickerDebug */ = {
+			isa = PBXGroup;
+			children = (
+				0EF74EDA19F02AB0006865E9 /* AppDelegate.h */,
+				0EF74EDB19F02AB0006865E9 /* AppDelegate.m */,
+				0EF74EDD19F02AB0006865E9 /* ViewController.h */,
+				0EF74EDE19F02AB0006865E9 /* ViewController.m */,
+				0EF74EE019F02AB1006865E9 /* Main.storyboard */,
+				0EF74EE319F02AB1006865E9 /* Images.xcassets */,
+				0EF74EE519F02AB1006865E9 /* LaunchScreen.xib */,
+				0EF74ED619F02AB0006865E9 /* Supporting Files */,
+			);
+			path = ImagePickerDebug;
+			sourceTree = "<group>";
+		};
+		0EF74ED619F02AB0006865E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0EF74ED719F02AB0006865E9 /* Info.plist */,
+				0EF74ED819F02AB0006865E9 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0EF74EEF19F02AB1006865E9 /* ImagePickerDebugTests */ = {
+			isa = PBXGroup;
+			children = (
+				0EF74EF219F02AB1006865E9 /* ImagePickerDebugTests.m */,
+				0EF74EF019F02AB1006865E9 /* Supporting Files */,
+			);
+			path = ImagePickerDebugTests;
+			sourceTree = "<group>";
+		};
+		0EF74EF019F02AB1006865E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0EF74EF119F02AB1006865E9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -133,6 +214,7 @@
 				0E46784319EFF3800074260F /* Sources */,
 				0E46784419EFF3800074260F /* Frameworks */,
 				0E46784519EFF3800074260F /* CopyFiles */,
+				0EF74ECE19F02A7B006865E9 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -143,22 +225,24 @@
 			productReference = 0E46784719EFF3800074260F /* libImagePicker.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		0E46785119EFF3800074260F /* ImagePickerTests */ = {
+		0EF74ED319F02AB0006865E9 /* ImagePickerDebug */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0E46785B19EFF3800074260F /* Build configuration list for PBXNativeTarget "ImagePickerTests" */;
+			buildConfigurationList = 0EF74EF419F02AB1006865E9 /* Build configuration list for PBXNativeTarget "ImagePickerDebug" */;
 			buildPhases = (
-				0E46784E19EFF3800074260F /* Sources */,
-				0E46784F19EFF3800074260F /* Frameworks */,
-				0E46785019EFF3800074260F /* Resources */,
+				0EF74ED019F02AB0006865E9 /* Sources */,
+				0EF74ED119F02AB0006865E9 /* Frameworks */,
+				0EF74ED219F02AB0006865E9 /* Resources */,
+				0EF74EFA19F02AC0006865E9 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0EF74EFC19F02B2C006865E9 /* PBXTargetDependency */,
 			);
-			name = ImagePickerTests;
-			productName = ImagePickerTests;
-			productReference = 0E46785219EFF3800074260F /* ImagePickerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			name = ImagePickerDebug;
+			productName = ImagePickerDebug;
+			productReference = 0EF74ED419F02AB0006865E9 /* ImagePickerDebug.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -172,7 +256,7 @@
 					0E46784619EFF3800074260F = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
-					0E46785119EFF3800074260F = {
+					0EF74ED319F02AB0006865E9 = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
 				};
@@ -183,6 +267,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 0E46783E19EFF3800074260F;
 			productRefGroup = 0E46784819EFF3800074260F /* Products */;
@@ -190,20 +275,39 @@
 			projectRoot = "";
 			targets = (
 				0E46784619EFF3800074260F /* ImagePicker */,
-				0E46785119EFF3800074260F /* ImagePickerTests */,
+				0EF74ED319F02AB0006865E9 /* ImagePickerDebug */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0E46785019EFF3800074260F /* Resources */ = {
+		0EF74ED219F02AB0006865E9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EF74EE219F02AB1006865E9 /* Main.storyboard in Resources */,
+				0EF74EE719F02AB1006865E9 /* LaunchScreen.xib in Resources */,
+				0EF74EE419F02AB1006865E9 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0EF74EFA19F02AC0006865E9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\nsource ~/.profile\n\nPATH=${PATH}:~/sdks/air/15.0.0.249/bin\n\necho \"Please provide the complete path of the IPA before building this target\"\n#PATH_TO_IPA=`~/dev/airext/image-picker/image-picker-ios/NativeImagePicker/ImagePickerDebug.ipa`\n\nBUILD_DIR=~/dev/airext/image-picker/build/\nANE_NAME=\"ImagePicker.ane\"\n\n#IPA_DIR=`/usr/bin/dirname \"$PATH_TO_IPA\"`\nIPA_DIR=~/dev/airext/image-picker/build/launch/\n#IPA_NAME=`/usr/bin/basename \"$PATH_TO_IPA\"`\nIPA_NAME=\"ImagePickerDebug.ipa\"\n#IPA_BASE_NAME=`/usr/bin/basename \"$PATH_TO_IPA\" .ipa`\nIPA_BASE_NAME=\"ImagePickerDebug\"\n\n#package ImagePicker.ane\n\npushd \"$BUILD_DIR\"\n\necho \"packaging s-picker.ane extension...\"\n\nsh build.sh\n\necho \"image-picker.ane packaged.\"\n\necho \"packaging ImagePickerDebug.ipa application...\"\n\nsh debug.sh\n\necho \"ImagePickerDebug.ipa packaged.\"\n\npopd\n\n#debug ImagePickerDebug.ipa\n\necho start\necho \"$IPA_DIR\"\necho $IPA_NAME\necho $IPA_BASE_NAME\n\n# change to the proper directory\npushd \"$IPA_DIR\"\n\n# extract the IPA\ncp \"$IPA_NAME\" \"$IPA_NAME\".zip\nunzip -o \"$IPA_NAME\".zip\nrm \"$IPA_NAME\".zip\n\n# copy the contents of the IPA to the location xcode wants\ncp -r Payload/\"$IPA_BASE_NAME\".app/ \"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\ncp -r \"$IPA_BASE_NAME\".app.dSYM \"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\n\n# remove the following files and folders to avoid signature errors when installing the app\nrm \"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/_CodeSignature/CodeResources\"\nrm \"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/_CodeSignature\"\nrm \"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/CodeResources\"\nrm \"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/PkgInfo\" #2>/dev/null\n\n\n# restore working directory\npopd";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0E46784319EFF3800074260F /* Sources */ = {
@@ -218,14 +322,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0E46784E19EFF3800074260F /* Sources */ = {
+		0EF74ED019F02AB0006865E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EF74EDF19F02AB0006865E9 /* ViewController.m in Sources */,
+				0EF74EDC19F02AB0006865E9 /* AppDelegate.m in Sources */,
+				0EF74ED919F02AB0006865E9 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0EF74EFC19F02B2C006865E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E46784619EFF3800074260F /* ImagePicker */;
+			targetProxy = 0EF74EFB19F02B2C006865E9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0EF74EE019F02AB1006865E9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0EF74EE119F02AB1006865E9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0EF74EE519F02AB1006865E9 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0EF74EE619F02AB1006865E9 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0E46785619EFF3800074260F /* Debug */ = {
@@ -320,33 +454,33 @@
 			};
 			name = Release;
 		};
-		0E46785C19EFF3800074260F /* Debug */ = {
+		0EF74EF519F02AB1006865E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ImagePickerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				INFOPLIST_FILE = ImagePickerDebug/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		0E46785D19EFF3800074260F /* Release */ = {
+		0EF74EF619F02AB1006865E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ImagePickerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = ImagePickerDebug/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -369,12 +503,13 @@
 				0E46785A19EFF3800074260F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		0E46785B19EFF3800074260F /* Build configuration list for PBXNativeTarget "ImagePickerTests" */ = {
+		0EF74EF419F02AB1006865E9 /* Build configuration list for PBXNativeTarget "ImagePickerDebug" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0E46785C19EFF3800074260F /* Debug */,
-				0E46785D19EFF3800074260F /* Release */,
+				0EF74EF519F02AB1006865E9 /* Debug */,
+				0EF74EF619F02AB1006865E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
