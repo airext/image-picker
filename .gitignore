@@ -34,3 +34,7 @@ DerivedData
 #
 bin-debug/
 bin-release/
+
+# AirExt
+#
+build/launch/*
