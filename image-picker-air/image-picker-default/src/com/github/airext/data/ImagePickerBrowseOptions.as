@@ -4,6 +4,7 @@
 package com.github.airext.data
 {
 import flash.media.CameraRollBrowseOptions;
+import flash.system.Capabilities;
 
 public class ImagePickerBrowseOptions extends CameraRollBrowseOptions
 {
@@ -12,8 +13,28 @@ public class ImagePickerBrowseOptions extends CameraRollBrowseOptions
         super();
     }
 
-    public var image:Boolean = true;
+    public function get image():Boolean
+    {
+        trace("ImagePicker is not supported for " + Capabilities.os);
 
-    public var video:Boolean = false;
+        return false;
+    }
+
+    public function set image(value:Boolean):void
+    {
+        trace("ImagePicker is not supported for " + Capabilities.os);
+    }
+
+    public function get video():Boolean
+    {
+        trace("ImagePicker is not supported for " + Capabilities.os);
+
+        return false;
+    }
+
+    public function set video(value:Boolean):void
+    {
+        trace("ImagePicker is not supported for " + Capabilities.os);
+    }
 }
 }

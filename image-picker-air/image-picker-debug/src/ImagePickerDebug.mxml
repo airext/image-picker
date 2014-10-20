@@ -36,7 +36,7 @@
 
             var scale:Number = runtimeDPI >= 320 ? 2 : 1;
 
-            options.origin = new Rectangle(position.x/scale, position.y/scale, showButton.width/scale, showButton.height/scale);
+            options.origin = null;// new Rectangle(position.x/scale, position.y/scale, showButton.width/scale, showButton.height/scale);
             options.width = widthNumericStepper.value;
             options.height = heightNumericStepper.value;
 
