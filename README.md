@@ -21,10 +21,14 @@ private function selectHandler(event:ImagePickerEvent):void
 {
   var asset:Asset = event.asset;
   
+  // open associated input stream
+  
   var input:AssetInput = asset.open();
   input.addEventListener(Event.OPEN, function openHandler (event:Event):void
   {
     input.removeEventListener(Event.OPEN, openHandler);
+    
+    // read available bytes
     
     var bytes:ByteArray = new ByteArray();
     input.readBytes(bytes);
