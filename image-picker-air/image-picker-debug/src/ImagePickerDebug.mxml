@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" enterFrame="enterFrameHandler(event)">
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
 
     <fx:Script>
         <![CDATA[
@@ -27,18 +27,14 @@
 
         private function show_clickHandler(event:MouseEvent):void
         {
-            var position:Point = new Point(showButton.x, showButton.y);
-            position = this.localToGlobal(position);
+            var scale:Number = runtimeDPI >= 320 ? 2 : 1;
+
+            var bounds:Rectangle = showButton.getBounds(stage);
 
             var options:ImagePickerBrowseOptions = new ImagePickerBrowseOptions();
             options.video = true;
             options.image = true;
-
-            var scale:Number = runtimeDPI >= 320 ? 2 : 1;
-
-            options.origin = null;// new Rectangle(position.x/scale, position.y/scale, showButton.width/scale, showButton.height/scale);
-            options.width = widthNumericStepper.value;
-            options.height = heightNumericStepper.value;
+            options.origin = new Rectangle(bounds.x/scale, bounds.y/scale, bounds.width/scale, bounds.height/scale);
 
             ImagePicker.sharedInstance().addEventListener(ImagePickerEvent.SELECT, selectHandler);
             ImagePicker.sharedInstance().addEventListener(ImagePickerEvent.CANCEL, cancelHandler);
@@ -59,11 +55,6 @@
         private function cancelHandler(event:ImagePickerEvent):void
         {
             trace("cancel");
-        }
-
-        private function enterFrameHandler(event:Event):void
-        {
-//            trace(System.privateMemory);
         }
 
         private function read_clickHandler(event:MouseEvent):void
@@ -121,11 +112,6 @@
     <s:Button label="Open" enabled="{asset}" click="open_clickHandler(event)" />
 
     <s:Button label="Read" enabled="{input}" click="read_clickHandler(event)" />
-
-    <s:HGroup>
-        <s:NumericStepper id="widthNumericStepper" minimum="0" stepSize="50" maximum="1000" width="200" height="100" />
-        <s:NumericStepper id="heightNumericStepper" minimum="0" stepSize="50" maximum="1000" width="200" height="100" />
-    </s:HGroup>
 
     <s:Image source="{bytes}" />
 
