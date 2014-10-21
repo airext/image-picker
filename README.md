@@ -3,6 +3,11 @@ image-picker ![License MIT](http://img.shields.io/badge/license-MIT-lightgray.sv
 
 ![iOS](http://img.shields.io/badge/platform-ios-blue.svg)
 
+This is [AIR Native Extension](http://www.adobe.com/devnet/air/native-extensions-for-air.html) that extends standard CameraRoll available in AIR and adds next featuers:
+ * support for video assets;
+ * file-name for selected asset;
+ * loading video asset into ByteArray;
+
 ## Usage
 
 ```as3
