@@ -13,6 +13,8 @@
 
         import mx.events.ModuleEvent;
 
+        import spark.components.Alert;
+
         [Bindable]
         private var asset:Asset;
 
@@ -37,6 +39,7 @@
             options.origin = new Rectangle(bounds.x/scale, bounds.y/scale, bounds.width/scale, bounds.height/scale);
 
             ImagePicker.sharedInstance().addEventListener(ImagePickerEvent.SELECT, selectHandler);
+            ImagePicker.sharedInstance().addEventListener(ErrorEvent.ERROR, errorHandler);
             ImagePicker.sharedInstance().addEventListener(ImagePickerEvent.CANCEL, cancelHandler);
 
             ImagePicker.sharedInstance().browse(options);
@@ -50,6 +53,11 @@
             trace(event.asset.url);
 
             this.asset = event.asset as Asset;
+        }
+
+        private function errorHandler(event:ErrorEvent):void
+        {
+            Alert.show(event.toString());
         }
 
         private function cancelHandler(event:ImagePickerEvent):void
@@ -67,7 +75,7 @@
 
             trace("Bytes read: ", bytes.length);
 
-            this.bytes = bytes;
+            this.bytes = bytes.length > 0 ? bytes : null;
         }
 
         private function open_clickHandler(event:MouseEvent):void

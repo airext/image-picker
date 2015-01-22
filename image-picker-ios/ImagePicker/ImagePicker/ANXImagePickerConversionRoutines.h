@@ -16,6 +16,8 @@
 
 +(BOOL) isNull: (FREObject) object;
 
+#pragma mark Read object's properties
+
 +(NSNumber*) getBoolFrom: (FREObject) object forProperty: (NSString*) property;
 
 +(NSNumber*) getNumberFrom: (FREObject) object forProperty: (NSString*) property;
@@ -27,6 +29,8 @@
 +(double) getDoubleFrom: (FREObject) object forProperty: (NSString*) property;
 
 +(CGRect) getRectFrom: (FREObject) object forProperty: (NSString*) property;
+
+#pragma mark Conversion methods
 
 +(FREObject) convertNSStringToFREObject:(NSString*) string;
 +(NSString*) convertFREObjectToNSString: (FREObject) string;

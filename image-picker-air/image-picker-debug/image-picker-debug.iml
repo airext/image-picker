@@ -18,6 +18,9 @@
         <packaging-air-desktop />
         <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/ImagePickerDebug-app.xml" package-file-name="ImagePickerDebug" />
         <packaging-ios enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/ImagePickerDebug-app.xml" package-file-name="ImagePickerDebug">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/Default-568h@2x.png" path-in-package="Default-568h@2x.png" />
+          </files-to-package>
           <AirSigningOptions keystore-path="$USER_HOME$/ios/certificate/ios_air_development.p12" provisioning-profile-path="$USER_HOME$/ios/provisioning/Generic_Profile.mobileprovision" />
         </packaging-ios>
       </configuration>

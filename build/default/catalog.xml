@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+    <versions>
+        <swc version="1.2"/>
+        <compiler name="ActionScript Compiler" version="2.0.0" build="354110"/>
+    </versions>
+    <features>
+        <feature-script-deps/>
+    </features>
+    <libraries>
+        <library path="library.swf">
+            <script name="com/github/airext/ImagePicker" mod="1413461923000">
+                <def id="com.github.airext:ImagePicker"/>
+                <dep id="Array" type="s"/>
+                <dep id="Boolean" type="s"/>
+                <dep id="Object" type="i"/>
+                <dep id="String" type="s"/>
+                <dep id="com.github.airext.core:image_picker" type="n"/>
+                <dep id="com.github.airext.data:Asset" type="s"/>
+                <dep id="com.github.airext.data:ImagePickerBrowseOptions" type="s"/>
+                <dep id="flash.system:Capabilities" type="e"/>
+                <dep id="trace" type="e"/>
+            </script>
+            <script name="com/github/airext/core/image_picker" mod="1413461888000">
+                <def id="com.github.airext.core:image_picker"/>
+            </script>
+            <script name="com/github/airext/data/Asset" mod="1413461950000">
+                <def id="com.github.airext.data:Asset"/>
+                <dep id="Boolean" type="s"/>
+                <dep id="Object" type="i"/>
+                <dep id="String" type="s"/>
+                <dep id="com.github.airext.data:AssetInput" type="s"/>
+                <dep id="flash.system:Capabilities" type="e"/>
+                <dep id="trace" type="e"/>
+            </script>
+            <script name="com/github/airext/data/AssetInput" mod="1413461942000">
+                <def id="com.github.airext.data:AssetInput"/>
+                <dep id="String" type="s"/>
+                <dep id="com.github.airext.core:image_picker" type="n"/>
+                <dep id="flash.events:EventDispatcher" type="i"/>
+                <dep id="flash.system:Capabilities" type="e"/>
+                <dep id="flash.utils:ByteArray" type="s"/>
+                <dep id="trace" type="e"/>
+                <dep id="uint" type="s"/>
+            </script>
+            <script name="com/github/airext/data/ImagePickerBrowseOptions" mod="1413555977000">
+                <def id="com.github.airext.data:ImagePickerBrowseOptions"/>
+                <dep id="Boolean" type="s"/>
+                <dep id="flash.media:CameraRollBrowseOptions" type="i"/>
+                <dep id="flash.system:Capabilities" type="e"/>
+                <dep id="trace" type="e"/>
+            </script>
+            <digests>
+                <digest type="SHA-256" signed="false" value="16e5eea0f26bf38bda0f621a78344c524a0a2f8ca0251129acfcd7604c1f0d0e"/>
+            </digests>
+        </library>
+    </libraries>
+</swc>

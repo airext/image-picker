@@ -8,6 +8,15 @@
 
 #import <MobileCoreServices/UTCoreTypes.h>
 
+/*
+ *  System Versioning Preprocessor Macros
+ */
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
 #import "ANXImagePicker.h"
 
 @implementation ANXImagePicker
@@ -244,14 +253,28 @@ UIPopoverController *currentPopoverController;
     [library assetForURL: assetURL
         resultBlock: ^(ALAsset *asset)
         {
-            if ([assets objectForKey: assetURL.absoluteString] == nil)
+            if (asset)
             {
-                ANXImagePickerAsset *promise = [[ANXImagePickerAsset alloc] initWithAsset: asset andURL: assetURL];
-             
-                [assets setObject:promise forKey:assetURL.absoluteString];
+                if ([assets objectForKey: assetURL.absoluteString] == nil)
+                {
+                    ANXImagePickerAsset *promise = [[ANXImagePickerAsset alloc] initWithAsset: asset andURL: assetURL];
+                    
+                    [assets setObject:promise forKey:assetURL.absoluteString];
+                }
+                
+                [self dispatch:@"ImagePicker.Browse.Select" withLevel:assetURL.absoluteString];
             }
-         
-            [self dispatch:@"ImagePicker.Browse.Select" withLevel:assetURL.absoluteString];
+            else
+            {
+                if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.1"))
+                {
+                    [self dispatch:@"ImagePicker.Browse.Failed" withLevel:@"The My Photo Stream is not supported on iOS 8.1"];
+                }
+                else
+                {
+                    [self dispatch:@"ImagePicker.Browse.Failed" withLevel:@"Something was wrong during loading Asset."];
+                }
+            }
         }
         failureBlock: ^(NSError *error)
         {
