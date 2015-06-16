@@ -35,6 +35,15 @@ DerivedData
 bin-debug/
 bin-release/
 
+
+# ANT
+#
+build.properties
+
 # AirExt
 #
 build/launch/*
+build/build.config
+build/temp
+*.apk
+*.ipa
