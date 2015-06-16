@@ -128,7 +128,7 @@ UIPopoverController *currentPopoverController;
     UIImagePickerController *currentImagePickerController = [[UIImagePickerController alloc] init];
     
     currentImagePickerController.delegate = self;
-    currentImagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    currentImagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     currentImagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
     currentImagePickerController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     currentImagePickerController.mediaTypes = mediaTypes;
@@ -268,12 +268,10 @@ UIPopoverController *currentPopoverController;
             {
                 if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.1"))
                 {
-                    [self dispatch:@"ImagePicker.Browse.Failed" withLevel:@"The My Photo Stream is not supported on iOS 8.1"];
+                    //
                 }
-                else
-                {
-                    [self dispatch:@"ImagePicker.Browse.Failed" withLevel:@"Something was wrong during loading Asset."];
-                }
+                
+                [self dispatch:@"ImagePicker.Browse.Failed" withLevel:@"Selected file is inaccessible for this operation"];
             }
         }
         failureBlock: ^(NSError *error)
