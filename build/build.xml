@@ -5,7 +5,7 @@
     <!--                             Properties                              -->
     <!--=====================================================================-->
 
-    <property name="name" value="imagepicker" />
+    <property name="name" value="image-picker" />
 
     <property name="ios.project.dir" value="../${name}-ios/ImagePicker" />
     <property name="air.project.dir" value="../${name}-air/${name}" />
@@ -34,10 +34,19 @@
 		<exec executable="xcodebuild" failonerror="true" dir="${ios.project.dir}">
 			<arg line='-project ImagePicker.xcodeproj'/>
 			<arg line='-sdk iphoneos' />
-            <arg line="-alltargets"/>
+            <arg line="-target ImagePicker"/>
 			<arg line='-configuration Release'/>
 			<arg line='SYMROOT=$(PWD)/../build/temp/ios/build'/>
 		</exec>
+
+        <!-- Build iOS part of the extension -->
+        <exec executable="xcodebuild" failonerror="true" dir="${ios.project.dir}">
+            <arg line='-project ImagePicker.xcodeproj'/>
+            <arg line='-sdk iphonesimulator' />
+            <arg line="-target ImagePicker"/>
+            <arg line='-configuration Release'/>
+            <arg line='SYMROOT=$(PWD)/../build/temp/ios/build'/>
+        </exec>
 
         <!-- Copy iOS build artifacts to temporary build folder -->
 		<copy file="temp/ios/build/Release-iphoneos/libImagePicker.a" todir="temp/ios" overwrite="true"/>
