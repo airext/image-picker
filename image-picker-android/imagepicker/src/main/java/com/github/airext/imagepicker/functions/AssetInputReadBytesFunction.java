@@ -38,7 +38,7 @@ public class AssetInputReadBytesFunction implements FREFunction
 
                 byte[] bytes = new byte[actualLength];
 
-                stream.read(bytes, offset, actualLength);
+                stream.read(bytes, 0, actualLength);
 
                 array.setProperty("length", FREObject.newObject(actualLength));
 
