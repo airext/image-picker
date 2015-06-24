@@ -5,10 +5,10 @@
       <configuration name="image-picker-debug" target-platform="Mobile" main-class="ImagePickerDebug" output-file="ImagePickerDebug.swf" output-folder="$MODULE_DIR$/bin-debug">
         <dependencies>
           <entries>
-            <entry library-id="6ca7999a-e422-4222-9f6e-ef083a29c0c9">
+            <entry library-id="e73404f6-e60d-4006-92c9-ac3ac633930e">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="e73404f6-e60d-4006-92c9-ac3ac633930e">
+            <entry library-id="b5e6ab73-6c2c-48b3-a736-e29491f8574b">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -36,17 +36,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="6ca7999a-e422-4222-9f6e-ef083a29c0c9" />
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/ane" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/ane" recursive="false" />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library type="flex">
         <properties id="e73404f6-e60d-4006-92c9-ac3ac633930e" />
         <CLASSES>
           <root url="file://$MODULE_DIR$/libs" />
@@ -56,6 +45,16 @@
         <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="b5e6ab73-6c2c-48b3-a736-e29491f8574b" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../bin" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../../bin" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
-

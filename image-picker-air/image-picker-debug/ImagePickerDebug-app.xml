@@ -214,10 +214,12 @@
     </iPhone>
 
     <!-- Android specific tags that get passed to AndroidManifest.xml file. -->
-    <!--<android>-->
-        <!--<manifestAdditions>-->
-            <!--<![CDATA[-->
-            <!--<manifest android:installLocation="auto">-->
+    <android>
+        <manifestAdditions>
+            <![CDATA[
+            <manifest android:installLocation="auto">
+                <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+                <uses-permission android:name="com.google.android.apps.photos.permission.GOOGLE_PHOTOS"/>
                 <!--<uses-permission android:name="android.permission.INTERNET"/>-->
                 <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
                 <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
@@ -231,22 +233,23 @@
                 <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>-->
 
                 <!--<uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch"/>-->
-                <!--<application android:enabled="true">
-                    <activity android:excludeFromRecents="false">
-                        <intent-filter>
-                            <action android:name="android.intent.action.MAIN"/>
-                            <category android:name="android.intent.category.LAUNCHER"/>
-                        </intent-filter>
-                    </activity>
-                </application>-->
-            <!--</manifest>-->
-            <!--]]>-->
-            <!--</manifestAdditions>-->
+                <application android:enabled="true">
+                    <activity android:name="com.github.airext.imagepicker.activities.ImagePickerActivity" />
+                    <!--<activity android:excludeFromRecents="false">-->
+                        <!--<intent-filter>-->
+                            <!--<action android:name="android.intent.action.MAIN"/>-->
+                            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+                        <!--</intent-filter>-->
+                    <!--</activity>-->
+                </application>
+            </manifest>
+            ]]>
+            </manifestAdditions>
 
         <!-- Color depth for the app (either "32bit" or "16bit"). Optional. Default 16bit before namespace 3.0, 32bit after -->
         <!--<colorDepth></colorDepth>-->
         <!-- Indicates if the app contains video or not. Necessary for ordering of video planes with graphics plane, especially in Jellybean - if you app does video this must be set to true - valid values are true or false -->
         <!-- <containsVideo></containsVideo> -->
-    <!--</android>-->
+    </android>
 
 </application>

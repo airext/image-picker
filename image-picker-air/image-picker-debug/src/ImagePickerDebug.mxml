@@ -27,6 +27,13 @@
         [Bindable]
         private var bytes:ByteArray;
 
+        private function isSupported_clickHandler(event:MouseEvent):void
+        {
+            trace("ImagePicker.isSupported()", ImagePicker.isSupported());
+
+            Alert.show(String(ImagePicker.isSupported()));
+        }
+
         private function show_clickHandler(event:MouseEvent):void
         {
             var scale:Number = runtimeDPI >= 320 ? 2 : 1;
@@ -34,9 +41,9 @@
             var bounds:Rectangle = showButton.getBounds(stage);
 
             var options:ImagePickerBrowseOptions = new ImagePickerBrowseOptions();
-            options.video = true;
+            options.video = false;
             options.image = true;
-            options.origin = new Rectangle(bounds.x/scale, bounds.y/scale, bounds.width/scale, bounds.height/scale);
+            options.origin = new Rectangle(bounds.x / scale, bounds.y / scale, bounds.width / scale, bounds.height / scale);
 
             ImagePicker.sharedInstance().addEventListener(ImagePickerEvent.SELECT, selectHandler);
             ImagePicker.sharedInstance().addEventListener(ErrorEvent.ERROR, errorHandler);
@@ -115,11 +122,17 @@
         <s:VerticalLayout horizontalAlign="center" />
     </s:layout>
 
+    <s:Button label="Is Supported" click="isSupported_clickHandler(event)" />
+
     <s:Button id="showButton" label="Show" click="show_clickHandler(event)" />
+
+    <s:Button label="CameraRoll" click="(new CameraRoll()).browseForImage();" />
 
     <s:Button label="Open" enabled="{asset}" click="open_clickHandler(event)" />
 
     <s:Button label="Read" enabled="{input}" click="read_clickHandler(event)" />
+
+    <s:Label text="{asset.name}" />
 
     <s:Image source="{bytes}" />
 

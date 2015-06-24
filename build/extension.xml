@@ -10,6 +10,20 @@
         <finalizer>ANXImagePickerFinalizer</finalizer>
       </applicationDeployment>
     </platform>
+    <platform name="iPhone-x86">
+      <applicationDeployment>
+        <nativeLibrary>libImagePickerSimulator.a</nativeLibrary>
+        <initializer>ANXImagePickerInitializer</initializer>
+        <finalizer>ANXImagePickerFinalizer</finalizer>
+      </applicationDeployment>
+    </platform>
+    <platform name="Android-ARM">
+      <applicationDeployment>
+        <nativeLibrary>libImagePicker.jar</nativeLibrary>
+        <initializer>com.github.airext.ImagePicker</initializer>
+        <finalizer>com.github.airext.ImagePicker</finalizer>
+      </applicationDeployment>
+    </platform>
     <platform name="default">
       <applicationDeployment />
     </platform>
