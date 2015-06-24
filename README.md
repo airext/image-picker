@@ -1,7 +1,7 @@
 image-picker ![License MIT](http://img.shields.io/badge/license-MIT-lightgray.svg)
 ===
 
-![iOS](http://img.shields.io/badge/platform-ios-blue.svg)
+![iOS](http://img.shields.io/badge/platform-ios-blue.svg) ![Android](http://img.shields.io/badge/platform-android-green.svg)
 
 This is [AIR Native Extension](http://www.adobe.com/devnet/air/native-extensions-for-air.html) that extends standard CameraRoll available in AIR and adds next featuers:
  * support for video assets;
