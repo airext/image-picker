@@ -4,7 +4,7 @@ unzip -o image-picker.swc
 
 unzip -o default/image-picker-default.swc -d default
 
-adt -package -storetype pkcs12 -keystore ~/certs/rozd.p12 -storepass vopli -target ane image-picker.ane extension.xml -swc image-picker.swc -platform iPhone-ARM library.swf libImagePicker.a -platformoptions platform.xml -platform default -C default library.swf
+adt -package -storetype pkcs12 -keystore $AIR_CERTIFICATE -storepass $AIR_CERTIFICATE_STOREPASS -target ane image-picker.ane extension.xml -swc image-picker.swc -platform iPhone-ARM library.swf libImagePicker.a -platformoptions platform.xml -platform default -C default library.swf
 
 cp -R image-picker.ane ../image-picker-air/image-picker-debug/ane/image-picker.ane
 

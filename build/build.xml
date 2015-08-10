@@ -185,26 +185,6 @@
             <arg line="-platform default -C default/ ."/>
         </exec>
 
-        <!--<exec executable="${air.sdk}/bin/adt${bin.ext}" failonerror="true" dir="temp">-->
-            <!--<arg value="-package"/>-->
-            <!--<arg value="-storetype"/>-->
-            <!--<arg value="pkcs12"/>-->
-            <!--<arg value="-keystore"/>-->
-            <!--<arg value="${keystore.file}"/>-->
-            <!--<arg value="-storepass"/>-->
-            <!--<arg value="${keystore.password}"/>-->
-            <!--<arg value="-target"/>-->
-            <!--<arg value="ane"/>-->
-            <!--<arg value="${name}.ane"/>-->
-            <!--<arg value="../extension.xml"/>-->
-            <!--<arg line="-swc swc/${name}.swc"/>-->
-            <!--<arg line="-platform iPhone-ARM -platformoptions ../platform-ios.xml -C ios/ ."/>-->
-            <!--<arg line="-platform iPhone-x86 -platformoptions ../platform-ios.xml -C ios-simulator/ ."/>-->
-            <!--<arg line="-platform Android-ARM -platformoptions ../platform-android.xml -C android/ ."/>-->
-            <!--&lt;!&ndash;<arg line="-platform Android-x86 -platformoptions ../platform-android.xml -C android/ ."/>&ndash;&gt;-->
-            <!--<arg line="-platform default -C default/ ."/>-->
-        <!--</exec>-->
-
         <!-- Move packaged .ANE file to /bin directory -->
         <move file="temp/${name}.ane" todir="../bin"/>
 
@@ -212,7 +192,7 @@
         <copy file="temp/default/${name}.swc" todir="../bin"/>
 
         <!-- Remove temporary directory -->
-        <!--<delete dir="temp"/>-->
+        <delete dir="temp"/>
     </target>
 
 </project>

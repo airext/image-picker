@@ -1,4 +1,4 @@
-package com.github.airext.mylibrary;
+package com.github.airext.imagepicker;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
