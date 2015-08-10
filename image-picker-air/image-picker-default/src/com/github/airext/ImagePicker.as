@@ -11,11 +11,21 @@ import com.github.airext.core.image_picker;
 import com.github.airext.data.Asset;
 import com.github.airext.data.ImagePickerBrowseOptions;
 
+import flash.events.EventDispatcher;
+
 import flash.system.Capabilities;
 
 use namespace image_picker;
 
-public class ImagePicker
+[Event(name="select", type="com.github.airext.events.ImagePickerEvent")]
+
+[Event(name="cancel", type="com.github.airext.events.ImagePickerEvent")]
+
+[Event(name="status", type="flash.events.StatusEvent")]
+
+[Event(name="error", type="flash.events.ErrorEvent")]
+
+public class ImagePicker extends EventDispatcher
 {
     //--------------------------------------------------------------------------
     //
