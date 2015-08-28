@@ -32,6 +32,8 @@
 
 #pragma mark Conversion methods
 
++(FREObject) convertBoolToFREObject:(BOOL) value;
+
 +(FREObject) convertNSStringToFREObject:(NSString*) string;
 +(NSString*) convertFREObjectToNSString: (FREObject) string;
 

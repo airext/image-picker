@@ -73,7 +73,7 @@ FREObject ANXImagePickerAssetInputOpen(FREContext context, void* functionData, u
     
     [[ANXImagePicker sharedInstance] openAssetInput: url];
     
-    return NULL;
+    return [ANXImagePickerConversionRoutines convertBoolToFREObject:YES];
 }
 
 FREObject ANXImagePickerAssetInputClose(FREContext context, void* functionData, uint32_t argc, FREObject argv[])

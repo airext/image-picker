@@ -48,9 +48,11 @@ public class AssetInput extends EventDispatcher
         trace("ImagePicker is not supported for " + Capabilities.os);
     }
 
-    image_picker function open(url:String):void
+    image_picker function open(url:String):Boolean
     {
         trace("ImagePicker is not supported for " + Capabilities.os);
+
+        return false;
     }
 
     image_picker function close():void

@@ -41,7 +41,7 @@
     result = FREGetObjectAsBool(propertyValue, &tempValue);
     
     if (result != FRE_OK)
-        return [NSNumber numberWithBool:NO];;
+        return [NSNumber numberWithBool:NO];
     
     return [NSNumber numberWithBool:tempValue];
 }
@@ -124,6 +124,14 @@
         return CGRectZero;
         
     return [self convertFREObjectToCGRect:propertyValue];
+}
+
++(FREObject) convertBoolToFREObject:(BOOL) value
+{
+    FREObject result;
+    FRENewObjectFromBool((uint32_t) value, &result);
+    
+    return result;
 }
 
 +(FREObject) convertNSStringToFREObject:(NSString*) string
