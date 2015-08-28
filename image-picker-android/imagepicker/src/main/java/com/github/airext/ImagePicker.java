@@ -48,6 +48,11 @@ public class ImagePicker implements FREExtension
         dispatch(code, "error");
     }
 
+    public static void log(String message)
+    {
+        dispatch("ImagePicker.Log", message);
+    }
+
     //--------------------------------------------------------------------------
     //
     //  Methods
