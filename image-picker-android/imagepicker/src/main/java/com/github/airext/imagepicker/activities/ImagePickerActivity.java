@@ -3,13 +3,19 @@ package com.github.airext.imagepicker.activities;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
+import android.provider.OpenableColumns;
+import com.adobe.fre.FREContext;
 import com.github.airext.ImagePicker;
 import com.github.airext.imagepicker.data.Asset;
 import com.github.airext.imagepicker.helpers.ConversionRoutines;
 
-import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 
@@ -77,30 +83,28 @@ public class ImagePickerActivity extends Activity
             {
                 case RESULT_OK :
 
-                    final Uri uri = getStreamExtra((Uri) intent.getData());
+                    final Uri uri = intent.getData();
 
-                    String path = ConversionRoutines.convertUriToPath(getApplicationContext(), uri);
+                    String path = uri.toString();
 
-                    ContentResolver resolver = getContentResolver();
+                    String type = retrieveType(uri);
 
-                    String mimeType = resolver.getType(uri);
+                    String name = retrieveName(uri);
 
-                    String type = null;
+                    Asset asset = Asset.preserve(path, name, type);
 
-                    if (mimeType.contains("image"))
+                    try
                     {
-                        type = "photo";
-                    }
-                    else if (mimeType.contains("video"))
-                    {
-                        type = "video";
-                    }
-                    else
-                    {
-                        type = "unknown";
-                    }
+                        FileInputStream stream = (FileInputStream) getContentResolver().openInputStream(uri);
 
-                    Asset asset = Asset.preserve(uri.toString(), new File(path).getName(), type);
+                        ImagePicker.streams.put(path, stream);
+                    }
+                    catch (FileNotFoundException e)
+                    {
+                        e.printStackTrace();
+
+                        ImagePicker.log("Stream could not be opened");
+                    }
 
                     ImagePicker.dispatch("ImagePicker.Browse.Select", asset.getPath());
 
@@ -117,25 +121,43 @@ public class ImagePickerActivity extends Activity
         finish();
     }
 
-    private Uri getStreamExtra(Uri streamUri)
+    private String retrieveType(Uri uri)
+    {
+        String mimeType = getContentResolver().getType(uri);
+
+        String type = "unknown";
+
+        if (mimeType.contains("image"))
+        {
+            type = "photo";
+        }
+        else if (mimeType.contains("video"))
+        {
+            type = "video";
+        }
+
+        return  type;
+    }
+
+    private String retrieveName(Uri uri)
     {
         try
         {
-            if (streamUri.getAuthority().equals("com.google.android.apps.photos.contentprovider") && streamUri.toString().endsWith("/ACTUAL"))
-            {
-                String[] parts = streamUri.toString().split("/");
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
 
-                if (parts.length > 3)
-                {
-                    return Uri.parse(URLDecoder.decode(parts[parts.length - 2], Charset.defaultCharset().name()));
-                }
-            }
+            cursor.moveToFirst();
+
+            int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+
+            return cursor.getString(nameIndex);
         }
         catch (Exception e)
         {
             e.printStackTrace();
-        }
 
-        return streamUri;
+            ImagePicker.log(e.toString());
+
+            return null;
+        }
     }
 }

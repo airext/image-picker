@@ -88,13 +88,13 @@ public class AssetInput extends EventDispatcher
     //  Methods: Internal API
     //-------------------------------------
 
-    image_picker function open(url:String):void
+    image_picker function open(url:String):Boolean
     {
         this.url = url;
 
         ImagePicker.context.addEventListener(StatusEvent.STATUS, statusHandler);
 
-        ImagePicker.context.call("assetInputOpen", this.url);
+        return ImagePicker.context.call("assetInputOpen", this.url);
     }
 
     image_picker function close():void

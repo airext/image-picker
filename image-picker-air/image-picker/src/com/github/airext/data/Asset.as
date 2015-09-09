@@ -103,7 +103,12 @@ public class Asset
         if (input == null)
         {
             input = new AssetInput();
-            input.open(_url);
+
+            if (!input.open(_url))
+            {
+                input.close();
+                input = null;
+            }
         }
 
         return input;

@@ -15,6 +15,12 @@
 
         import spark.components.Alert;
 
+        //----------------------------------------------------------------------
+        //
+        //  Variables
+        //
+        //----------------------------------------------------------------------
+
         [Bindable]
         private var asset:Asset;
 
@@ -22,17 +28,44 @@
         private var input:AssetInput;
 
         [Bindable]
-        private var inputOpened:Boolean;
+        private var bytes:ByteArray;
 
         [Bindable]
-        private var bytes:ByteArray;
+        private var logs:String = "";
+
+        //----------------------------------------------------------------------
+        //
+        //  Methods
+        //
+        //----------------------------------------------------------------------
+
+        private function log(...rest):void
+        {
+            logs += rest.join(" ") + "\n";
+
+            trace.apply(null, rest);
+        }
+
+        //----------------------------------------------------------------------
+        //
+        //  Event handlers
+        //
+        //----------------------------------------------------------------------
+
+        //-----------------------------------
+        //  Event handlers: isSupported button
+        //-----------------------------------
 
         private function isSupported_clickHandler(event:MouseEvent):void
         {
-            trace("ImagePicker.isSupported()", ImagePicker.isSupported());
+            log("ImagePicker.isSupported()", ImagePicker.isSupported());
 
             Alert.show(String(ImagePicker.isSupported()));
         }
+
+        //-----------------------------------
+        //  Event handlers: show button
+        //-----------------------------------
 
         private function show_clickHandler(event:MouseEvent):void
         {
@@ -48,16 +81,59 @@
             ImagePicker.sharedInstance().addEventListener(ImagePickerEvent.SELECT, selectHandler);
             ImagePicker.sharedInstance().addEventListener(ErrorEvent.ERROR, errorHandler);
             ImagePicker.sharedInstance().addEventListener(ImagePickerEvent.CANCEL, cancelHandler);
+            ImagePicker.sharedInstance().addEventListener(StatusEvent.STATUS, statusHandler);
 
             ImagePicker.sharedInstance().browse(options);
         }
 
+        //-----------------------------------
+        //  Event handlers: Read button
+        //-----------------------------------
+
+        private function read_clickHandler(event:MouseEvent):void
+        {
+            log("Bytes Available: ", input.bytesAvailable);
+
+            var bytes:ByteArray = new ByteArray();
+
+            input.readBytes(bytes);
+
+            log("Bytes read: ", bytes.length);
+
+            this.bytes = bytes.length > 0 ? bytes : null;
+        }
+
+        //-----------------------------------
+        //  Event handlers: Open button
+        //-----------------------------------
+
+        private function open_clickHandler(event:MouseEvent):void
+        {
+            if (input != null)
+            {
+                input.removeEventListener(StatusEvent.STATUS, input_statusHandler);
+                input.removeEventListener(Event.OPEN, input_openHandler);
+                asset.close();
+            }
+
+            input = asset.open();
+
+            if (input != null)
+            {
+                input.addEventListener(Event.OPEN, input_openHandler);
+            }
+        }
+
+        //-----------------------------------
+        //  Event handlers: ImagePicker
+        //-----------------------------------
+
         private function selectHandler(event:ImagePickerEvent):void
         {
-            trace(event.asset);
-            trace(event.asset.name);
-            trace(event.asset.type);
-            trace(event.asset.url);
+            log(event.asset);
+            log(event.asset.name);
+            log(event.asset.type);
+            log(event.asset.url);
 
             this.asset = event.asset as Asset;
         }
@@ -69,50 +145,35 @@
 
         private function cancelHandler(event:ImagePickerEvent):void
         {
-            trace("cancel");
+            log("cancel");
         }
 
-        private function read_clickHandler(event:MouseEvent):void
+        private function statusHandler(event:StatusEvent):void
         {
-            trace("Bytes Available: ", input.bytesAvailable);
+            switch (event.code)
+            {
+                case "ImagePicker.Log" :
 
-            var bytes:ByteArray = new ByteArray();
+                        log("ImagePicker:", event.level);
 
-            input.readBytes(bytes);
-
-            trace("Bytes read: ", bytes.length);
-
-            this.bytes = bytes.length > 0 ? bytes : null;
+                    break;
+            }
         }
 
-        private function open_clickHandler(event:MouseEvent):void
-        {
-            if (input != null)
-            {
-                input.removeEventListener(StatusEvent.STATUS, input_statusHandler);
-            }
-
-            inputOpened = false;
-
-            asset.close();
-
-            input = asset.open();
-
-            var openHandler:Function = function (event:Event):void
-            {
-                input.removeEventListener(Event.OPEN, openHandler);
-
-                input.addEventListener(StatusEvent.STATUS, input_statusHandler);
-
-                inputOpened = true;
-            }
-
-            input.addEventListener(Event.OPEN, openHandler);
-        }
+        //-----------------------------------
+        //  Event handlers: AssetInput
+        //-----------------------------------
 
         private function input_statusHandler(event:StatusEvent):void
         {
-            trace("StatusEvent.code:", event.code);
+            log("StatusEvent.code:", event.code);
+        }
+
+        private function input_openHandler(event:Event):void
+        {
+            input.removeEventListener(Event.OPEN, input_openHandler);
+
+            input.addEventListener(StatusEvent.STATUS, input_statusHandler);
         }
 
         ]]>
@@ -133,6 +194,14 @@
     <s:Button label="Read" enabled="{input}" click="read_clickHandler(event)" />
 
     <s:Label text="{asset.name}" />
+
+    <s:Scroller height="300" width="100%" id="scroller1">
+        <s:Group width="100%">
+            <s:Label cacheAsBitmap="true" width="100%" fontSize="32">
+                <s:text>{logs}</s:text>
+            </s:Label>
+        </s:Group>
+    </s:Scroller>
 
     <s:Image source="{bytes}" />
 

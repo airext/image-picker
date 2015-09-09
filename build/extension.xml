@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension xmlns="http://ns.adobe.com/air/extension/4.0">
   <id>com.github.airext.ImagePicker</id>
-  <versionNumber>1.0.1</versionNumber>
+  <versionNumber>1.1.0</versionNumber>
   <platforms>
     <platform name="iPhone-ARM">
       <applicationDeployment>
@@ -18,6 +18,13 @@
       </applicationDeployment>
     </platform>
     <platform name="Android-ARM">
+      <applicationDeployment>
+        <nativeLibrary>libImagePicker.jar</nativeLibrary>
+        <initializer>com.github.airext.ImagePicker</initializer>
+        <finalizer>com.github.airext.ImagePicker</finalizer>
+      </applicationDeployment>
+    </platform>
+    <platform name="Android-x86">
       <applicationDeployment>
         <nativeLibrary>libImagePicker.jar</nativeLibrary>
         <initializer>com.github.airext.ImagePicker</initializer>

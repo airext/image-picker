@@ -1,14 +1,10 @@
 package com.github.airext.imagepicker.functions;
 
 import android.net.Uri;
-import android.os.Binder;
-import android.util.Log;
 import com.adobe.fre.*;
 import com.github.airext.ImagePicker;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
 
 /**
  * Created by Max Rozdobudko on 6/23/15.
@@ -18,9 +14,11 @@ public class AssetInputOpenFunction implements FREFunction
     @Override
     public FREObject call(FREContext context, FREObject[] args)
     {
+        ImagePicker.log("AssetInputOpenFunction");
+
         String path = null;
 
-        final long token = Binder.clearCallingIdentity();
+//        final long token = Binder.clearCallingIdentity();
 
         try
         {
@@ -32,12 +30,25 @@ public class AssetInputOpenFunction implements FREFunction
 
                 FileInputStream stream = (FileInputStream) context.getActivity().getContentResolver().openInputStream(uri);
 
-                Log.d("ImagePicker", "Input is " + stream);
+                if (stream != null)
+                {
+                    ImagePicker.streams.put(path, stream);
 
-                ImagePicker.streams.put(path, stream);
+                    ImagePicker.dispatch("ImagePicker.AssetInput.Open.Success", path);
+
+                    return FREObject.newObject(true);
+                }
+                else
+                {
+                    ImagePicker.dispatch("ImagePicker.AssetInput.Open.Failed", path);
+                }
             }
+            else
+            {
+                ImagePicker.dispatch("ImagePicker.AssetInput.Open.Success", path);
 
-            ImagePicker.dispatch("ImagePicker.AssetInput.Open.Success", path);
+                return FREObject.newObject(true);
+            }
         }
         catch (Exception e)
         {
@@ -47,7 +58,7 @@ public class AssetInputOpenFunction implements FREFunction
         }
         finally
         {
-            Binder.restoreCallingIdentity(token);
+//            Binder.restoreCallingIdentity(token);
         }
 
         return null;
