@@ -48,17 +48,19 @@ private function cancelHandler(event:ImagePickerEvent):void
 /** Handles input stream opening */
 private function input_openHandler (event:Event):void
 {
-  input.removeEventListener(Event.OPEN, openHandler);
+  this.input.removeEventListener(Event.OPEN, openHandler);
   
   // read available bytes
   var bytes:ByteArray = new ByteArray();
-  input.readBytes(bytes);
+  this.input.readBytes(bytes);
   
   // close Asset's input stream when you done
   this.asset.close();
 }
 
 ```
+
+*NOTE*: After v.1.1 you should close any asset ({Asset.close()} method)  even if its input stream is not be opened directly through {Asset.open()} method. It is because on Android input stream is opened immediately after application receives asset selected ny user.
 
 ## Screenshots
 TBD
