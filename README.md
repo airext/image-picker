@@ -23,15 +23,15 @@ ImagePicker.sharedInstance().browse(options);
 /** Handles case when user select asset */
 private function selectHandler(event:ImagePickerEvent):void
 {
-  var asset:Asset = event.asset;
+  this.asset = event.asset;
   
   // open associated input stream
-  input = asset.open();
+  this.input = asset.open();
   
   // check if input stream is successfully opened
   if (input != null)
   {
-    input.addEventListener(Event.OPEN, input_openHandler);
+    this.input.addEventListener(Event.OPEN, input_openHandler);
   }
   else
   {
@@ -53,6 +53,9 @@ private function input_openHandler (event:Event):void
   // read available bytes
   var bytes:ByteArray = new ByteArray();
   input.readBytes(bytes);
+  
+  // close Asset's input stream when you done
+  this.asset.close();
 }
 
 ```
