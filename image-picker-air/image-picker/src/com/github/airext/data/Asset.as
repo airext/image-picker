@@ -3,6 +3,7 @@
  */
 package com.github.airext.data
 {
+import com.github.airext.ImagePicker;
 import com.github.airext.core.image_picker;
 import com.github.airext.enum.AssetType;
 
@@ -120,6 +121,10 @@ public class Asset
         {
             input.close();
             input = null;
+        }
+        else
+        {
+            ImagePicker.context.call("assetInputClose", _url);
         }
     }
 }
