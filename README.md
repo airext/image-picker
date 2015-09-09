@@ -60,7 +60,7 @@ private function input_openHandler (event:Event):void
 
 ```
 
-*NOTE*: After v.1.1 you should close any asset ({Asset.close()} method)  even if its input stream is not be opened directly through {Asset.open()} method. It is because on Android input stream is opened immediately after application receives asset selected ny user.
+**NOTE**: After v.1.1 you should close any asset ({Asset.close()} method)  even if its input stream is not be opened directly through {Asset.open()} method. It is because on Android input stream is opened immediately after application receives asset selected ny user.
 
 ## Screenshots
 TBD
