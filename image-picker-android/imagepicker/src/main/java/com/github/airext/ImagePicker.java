@@ -35,6 +35,13 @@ public class ImagePicker implements FREExtension
 
     public static void dispatch(String code, String level)
     {
+        if (context == null)
+        {
+            Log.e("ImagePicker", "Could not dispatch event, FREContext is null.");
+
+            return;
+        }
+
         context.dispatchStatusEventAsync(code, level);
     }
 
@@ -50,6 +57,8 @@ public class ImagePicker implements FREExtension
 
     public static void log(String message)
     {
+        Log.d("ImagePicker", message);
+
         dispatch("ImagePicker.Log", message);
     }
 

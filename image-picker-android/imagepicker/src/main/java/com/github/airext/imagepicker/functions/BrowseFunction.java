@@ -6,6 +6,7 @@ import android.util.Log;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
+import com.github.airext.ImagePicker;
 import com.github.airext.imagepicker.activities.ImagePickerActivity;
 import com.github.airext.imagepicker.data.ImagePickerBrowseOptions;
 import com.github.airext.imagepicker.helpers.ConversionRoutines;
@@ -20,8 +21,6 @@ public class BrowseFunction implements FREFunction
     @Override
     public FREObject call(FREContext freContext, FREObject[] args)
     {
-        Log.i("ImagePicker", "BrowseFunction");
-
         ImagePickerBrowseOptions options = ConversionRoutines.convertFREObjectToImagePickerBrowseOptions(args.length > 0 ? args[0] : null);
 
         try

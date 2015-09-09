@@ -1,8 +1,6 @@
 package com.github.airext.imagepicker.functions;
 
 import android.net.Uri;
-import android.os.Binder;
-import android.os.ParcelFileDescriptor;
 import com.adobe.fre.*;
 import com.github.airext.ImagePicker;
 
@@ -16,9 +14,11 @@ public class AssetInputOpenFunction implements FREFunction
     @Override
     public FREObject call(FREContext context, FREObject[] args)
     {
+        ImagePicker.log("AssetInputOpenFunction");
+
         String path = null;
 
-        final long token = Binder.clearCallingIdentity();
+//        final long token = Binder.clearCallingIdentity();
 
         try
         {
@@ -45,7 +45,7 @@ public class AssetInputOpenFunction implements FREFunction
             }
             else
             {
-                ImagePicker.dispatch("ImagePicker.AssetInput.Open.Already", path);
+                ImagePicker.dispatch("ImagePicker.AssetInput.Open.Success", path);
 
                 return FREObject.newObject(true);
             }
@@ -58,29 +58,9 @@ public class AssetInputOpenFunction implements FREFunction
         }
         finally
         {
-            Binder.restoreCallingIdentity(token);
+//            Binder.restoreCallingIdentity(token);
         }
 
         return null;
-    }
-
-    private FileDescriptor openFileDescriptor(FREContext context, Uri uri)
-    {
-        ParcelFileDescriptor descriptor = null;
-
-        try
-        {
-            descriptor = context.getActivity().getContentResolver().openFileDescriptor(uri, "r");
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-
-            ImagePicker.log("File not found.");
-
-            return null;
-        }
-
-        return descriptor.getFileDescriptor();
     }
 }

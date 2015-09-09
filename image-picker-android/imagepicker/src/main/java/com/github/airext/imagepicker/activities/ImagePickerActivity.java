@@ -8,11 +8,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
+import com.adobe.fre.FREContext;
 import com.github.airext.ImagePicker;
 import com.github.airext.imagepicker.data.Asset;
 import com.github.airext.imagepicker.helpers.ConversionRoutines;
 
 import java.io.FileDescriptor;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
@@ -90,6 +92,19 @@ public class ImagePickerActivity extends Activity
                     String name = retrieveName(uri);
 
                     Asset asset = Asset.preserve(path, name, type);
+
+                    try
+                    {
+                        FileInputStream stream = (FileInputStream) getContentResolver().openInputStream(uri);
+
+                        ImagePicker.streams.put(path, stream);
+                    }
+                    catch (FileNotFoundException e)
+                    {
+                        e.printStackTrace();
+
+                        ImagePicker.log("Stream could not be opened");
+                    }
 
                     ImagePicker.dispatch("ImagePicker.Browse.Select", asset.getPath());
 
