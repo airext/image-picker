@@ -28,9 +28,6 @@
         private var input:AssetInput;
 
         [Bindable]
-        private var inputOpened:Boolean;
-
-        [Bindable]
         private var bytes:ByteArray;
 
         [Bindable]
@@ -116,15 +113,15 @@
             {
                 input.removeEventListener(StatusEvent.STATUS, input_statusHandler);
                 input.removeEventListener(Event.OPEN, input_openHandler);
+                asset.close();
             }
-
-            inputOpened = false;
-
-            asset.close();
 
             input = asset.open();
 
-            input.addEventListener(Event.OPEN, input_openHandler);
+            if (input != null)
+            {
+                input.addEventListener(Event.OPEN, input_openHandler);
+            }
         }
 
         //-----------------------------------
@@ -177,8 +174,6 @@
             input.removeEventListener(Event.OPEN, input_openHandler);
 
             input.addEventListener(StatusEvent.STATUS, input_statusHandler);
-
-            inputOpened = true;
         }
 
         ]]>
@@ -200,10 +195,14 @@
 
     <s:Label text="{asset.name}" />
 
+    <s:Scroller height="300" width="100%" id="scroller1">
+        <s:Group width="100%">
+            <s:Label cacheAsBitmap="true" width="100%" fontSize="32">
+                <s:text>{logs}</s:text>
+            </s:Label>
+        </s:Group>
+    </s:Scroller>
+
     <s:Image source="{bytes}" />
-
-    <s:TextArea width="100%" text="{logs}" height="300">
-
-    </s:TextArea>
 
 </s:Application>
