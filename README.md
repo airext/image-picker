@@ -11,27 +11,30 @@ This is [AIR Native Extension](http://www.adobe.com/devnet/air/native-extensions
 ## Usage
 
 ```as3
+
+private var asset:Asset;
+private var input:AssetInput;
+
 var options:ImagePickerBrowseOptions = new ImagePickerBrowseOptions();
 options.video = true;
 options.image = true;
 
 ImagePicker.sharedInstance().addEventListener(ImagePickerEvent.SELECT, selectHandler);
 ImagePicker.sharedInstance().addEventListener(ImagePickerEvent.CANCEL, cancelHandler);
-
 ImagePicker.sharedInstance().browse(options);
 
 /** Handles case when user select asset */
 private function selectHandler(event:ImagePickerEvent):void
 {
-  this.asset = event.asset;
+  asset = event.asset;
   
   // open associated input stream
-  this.input = asset.open();
+  input = asset.open();
   
   // check if input stream is successfully opened
   if (input != null)
   {
-    this.input.addEventListener(Event.OPEN, input_openHandler);
+    input.addEventListener(Event.OPEN, input_openHandler);
   }
   else
   {
@@ -48,14 +51,14 @@ private function cancelHandler(event:ImagePickerEvent):void
 /** Handles input stream opening */
 private function input_openHandler (event:Event):void
 {
-  this.input.removeEventListener(Event.OPEN, openHandler);
+  input.removeEventListener(Event.OPEN, openHandler);
   
   // read available bytes
   var bytes:ByteArray = new ByteArray();
-  this.input.readBytes(bytes);
+  input.readBytes(bytes);
   
   // close Asset's input stream when you done
-  this.asset.close();
+  asset.close();
 }
 
 ```
