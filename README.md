@@ -20,30 +20,42 @@ ImagePicker.sharedInstance().addEventListener(ImagePickerEvent.CANCEL, cancelHan
 
 ImagePicker.sharedInstance().browse(options);
 
-...
-
+/** Handles case when user select asset */
 private function selectHandler(event:ImagePickerEvent):void
 {
   var asset:Asset = event.asset;
   
   // open associated input stream
+  input = asset.open();
   
-  var input:AssetInput = asset.open();
-  input.addEventListener(Event.OPEN, function openHandler (event:Event):void
+  // check if input stream is successfully opened
+  if (input != null)
   {
-    input.removeEventListener(Event.OPEN, openHandler);
-    
-    // read available bytes
-    
-    var bytes:ByteArray = new ByteArray();
-    input.readBytes(bytes);
-  });
+    input.addEventListener(Event.OPEN, input_openHandler);
+  }
+  else
+  {
+    // failed open input stream
+  }
 }
 
+/** Handler case when user cancels selection */
 private function cancelHandler(event:ImagePickerEvent):void
 {
-  trace("cancel");
+  // cancelled by user
 }
+
+/** Handles input stream opening */
+private function input_openHandler (event:Event):void
+{
+  input.removeEventListener(Event.OPEN, openHandler);
+  
+  // read available bytes
+  var bytes:ByteArray = new ByteArray();
+  input.readBytes(bytes);
+}
+
 ```
 
 ## Screenshots
+TBD
